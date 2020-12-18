@@ -30,20 +30,46 @@ class App extends Component {
       console.log(err);
     })
   }
-  updateTodo = (id, incomingTodo) => {
+  updateTodo = (id, todo) => {
     // update the todo with the id in back end
-    // update the todo with the id in front end
+    axios.put(`/api/todos/${id}`, { todo })
+    .then(res => {
+      // update the todo with the id in front end
+      const todos = this.state.todos.map( t => {
+        if (t.id === id ){
+          return res.data
+        }
+        return t
+      })
+      this.setState({ todos })
+    })
+    .catch( err => {
+      console.log(err);
+    })
   }
   removeTodo = (id) => {
     // delete the todo in the back end 
-    // delete the todo from our front end
+    axios.delete(`/api/todos/${id}`)
+    .then( res => {
+      // delete the todo from our front end
+      const { todos } = this.state
+      this.setState({ todos: todos.filter(t => t.id !== id )})
+      alert(`todo with id of ${id}` + res.data.message )
+    })
+    .catch( err => {
+      console.log(err);
+    })
   }
   render() {
     const { todos } = this.state
     return (
       <Container>
         <TodoForm addTodo={this.addTodo} />
-        <TodoList todos={todos} />
+        <TodoList 
+          todos={todos} 
+          updateTodo={this.updateTodo} 
+          removeTodo={this.removeTodo}
+        />
       </Container>
     )
   }
