@@ -3,8 +3,10 @@ import { Container } from 'semantic-ui-react';
 import axios from 'axios';
 import TodoList from './components/todos/TodoList';
 import TodoForm from './components/todos/TodoForm';
+
 class App extends Component {
   state = { todos: [] }
+
   componentDidMount() {
     axios.get("/api/todos")
     .then( res => {
@@ -16,6 +18,7 @@ class App extends Component {
       console.log(err);
     })
   }
+
   addTodo = (todo) => {
     // add the todo in the back end
     // { incomingTodo: {title: 'rails', complete: true}}
@@ -30,6 +33,7 @@ class App extends Component {
       console.log(err);
     })
   }
+
   updateTodo = (id, todo) => {
     // update the todo with the id in back end
     axios.put(`/api/todos/${id}`, { todo })
@@ -47,6 +51,7 @@ class App extends Component {
       console.log(err);
     })
   }
+
   removeTodo = (id) => {
     // delete the todo in the back end 
     axios.delete(`/api/todos/${id}`)
@@ -60,6 +65,7 @@ class App extends Component {
       console.log(err);
     })
   }
+
   render() {
     const { todos } = this.state
     return (
@@ -74,4 +80,5 @@ class App extends Component {
     )
   }
 }
+
 export default App;

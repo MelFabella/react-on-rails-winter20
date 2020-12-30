@@ -1,17 +1,21 @@
 import { Component } from 'react';
 import { Form, Button } from 'semantic-ui-react';
+
 class TodoForm extends Component { 
   state = { title: '', complete: false }
+  
   componentDidMount() {
     if (this.props.id) {
       const { title, complete } = this.props
       this.setState({ title, complete })
     }
   }
+
   handleChange = (e) => {
     const { name, value } = e.target
     this.setState({ [name]: value })
   }
+
   handleSubmit = (e) => {
     e.preventDefault()
     if (this.props.id) {
@@ -23,6 +27,7 @@ class TodoForm extends Component {
     }
     this.setState({ title: '', complete: false })
   }
+
   render() {
     const { title } = this.state
     return(
@@ -37,4 +42,5 @@ class TodoForm extends Component {
     )
   }
 }
+
 export default TodoForm;

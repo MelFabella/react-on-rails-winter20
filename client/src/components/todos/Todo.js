@@ -1,11 +1,14 @@
 import { Component } from 'react';
 import TodoForm from './TodoForm';
+
 class Todo extends Component {
   state = { showEditForm: false }
+
   toggleForm = () => {
     const { showEditForm } = this.state
     this.setState({ showEditForm: !showEditForm })
   }
+  
   render() {
     const { title, complete, id, removeTodo } = this.props
     const { showEditForm } = this.state
@@ -21,4 +24,5 @@ class Todo extends Component {
     )
   }
 }
+
 export default Todo;
